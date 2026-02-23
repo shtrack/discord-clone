@@ -5,6 +5,7 @@ import { useAppSelector } from '../app/hooks';
 
 
 interface Messages {
+  id: string;
   timestamp: Timestamp;
   message: string;
   user: {
@@ -12,6 +13,9 @@ interface Messages {
     photo: string;
     email: string;
     displayName: string;
+  };
+  reactions?: { 
+    [key: string]: { uid: string; name: string }[] 
   };
 }
 
@@ -36,18 +40,22 @@ const useSubCollection = (
       orderBy("timestamp", "desc")
     );
 
-    onSnapshot(collectionRefOrderBy, (snapshot) => {
+    const unsub = onSnapshot(collectionRefOrderBy, (snapshot) => {
       let results: Messages[] = [];
       snapshot.docs.forEach((doc) => {
+
         results.push({
+          id: doc.id,
           timestamp: doc.data().timestamp,
           message: doc.data().message,
           user: doc.data().user,
+          reactions: doc.data().reactions,
         });
       });
       setSubDocuments(results);
-      console.log(results);
     });
+
+    return () => unsub();
   }, [channelId]);
 
   return { SubDocuments }

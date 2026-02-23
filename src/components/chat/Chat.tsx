@@ -39,6 +39,7 @@ const Chat = () => {
       message: inputText,
       timestamp: serverTimestamp(),
       user: user,
+      reactions: {},
     });
     setInputText("");
   };
@@ -47,15 +48,19 @@ const Chat = () => {
     <div className='chat'>
       <ChatHeader channelName={channelName} />
       <div className='chatMessage'>
-        {messages.map((message, index) => (
+        {messages.map((message) => (
           <ChatMessage 
-            key={index} 
+            key={message.id}
+            messageId={message.id}
+            channelId={channelId} 
             message={message.message} 
             timestamp={message.timestamp} 
             user={message.user}
+            reactions={message.reactions}
           />
         ))}
       </div>
+
       <div className='chatInput'>
         <AddCircleOutlineIcon />
         <form>

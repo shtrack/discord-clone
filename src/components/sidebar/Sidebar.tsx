@@ -34,9 +34,6 @@ const Sidebar = () => {
         <div className='serverIcon'>
           <img src="./discordIcon.png" alt="" />
         </div>
-        <div className='serverIcon'>
-          <img src="./logo192.png" alt="" />
-        </div>
       </div>
       <div className='sidebarRight'>
         <div className='sidebarTop'>
@@ -47,7 +44,7 @@ const Sidebar = () => {
           <div className='sidebarChannelsHeader'>
             <div className='sidebarHeader'>
               <ExpandMoreIcon />
-              <h4>プログラミングチャンネル</h4>
+              <h4>チャンネル</h4>
             </div>
             <AddIcon className='sidebarAddIcon' onClick={() => addChannel()} />
           </div>
